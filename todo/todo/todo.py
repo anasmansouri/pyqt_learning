@@ -3,9 +3,10 @@ import json
 from PyQt5 import QtCore, QtGui, QtWidgets, uic
 from PyQt5.QtCore import Qt
 from models import TodoModel
-qt_creator_file = "mainwindow.ui"
-Ui_MainWindow, QtBaseClass = uic.loadUiType(qt_creator_file)
-
+from tree_model_v_2 import CustomModel, CustomNode
+# qt_creator_file = "mainwindow.ui"
+# Ui_MainWindow, QtBaseClass = uic.loadUiType(qt_creator_file)
+from mainwindow import Ui_MainWindow
 
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
@@ -14,10 +15,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         Ui_MainWindow.__init__(self)
         self.setupUi(self)
         self.model = TodoModel()
+        self.tree_model = CustomModel()
         self.load()
         self.todoView.setModel(self.model)
+        self.load_services()
         self.addButton.pressed.connect(self.add)
         self.todoView.installEventFilter(self)
+        self.tree_view.installEventFilter((self))
 
     def eventFilter(self, source, event):
         if (event.type() == QtCore.QEvent.ContextMenu) and source is self.todoView:
@@ -30,7 +34,17 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             elif action == delete_action:
                 self.delete()
             return True
+        elif (event.type() == QtCore.QEvent.ContextMenu) and source is self.tree_view:
+            menu = QtWidgets.QMenu()
+            delete_all_action = menu.addAction('delete all')
+            action = menu.exec_(QtGui.QCursor.pos())
+            if action == delete_all_action:
+                self.delete_the_tree()
         return super(MainWindow, self).eventFilter(source, event)
+
+    def delete_the_tree(self):
+        self.tree_model.build_tree(services_dict=[])
+        self.tree_model.layoutChanged.emit()
 
     def add(self):
         """
@@ -79,22 +93,22 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 self.model.todos = json.load(f)
         except Exception:
             pass
+        # try:
+        #     with open('data_2.json','r') as f:
+        #         self.tree_model.item
+
+    def load_services(self):
+
+        with open('data_2.json', 'r') as services_json:
+            services_dict = json.load(services_json)
+            self.tree_model = CustomModel()
+            self.tree_model.build_tree(services_dict)
+            self.tree_view.setModel(self.tree_model)
+            self.tree_view.setHeaderHidden(True)
 
     def save(self):
         with open('data.db', 'w') as f:
             json.dump(self.model.todos, f)
-
-    def rightMenuShow(self):
-        menu = QtWidgets.QMenu(self)
-        add_action = menu.addAction("Add")
-        complete_action = menu.addAction("Complete")
-        action = menu.exec_(QtGui.QCursor.pos())
-
-        if action == add_action:
-            print("Add action")
-
-        if action == complete_action:
-            print("complete action")
 
 
 app = QtWidgets.QApplication(sys.argv)

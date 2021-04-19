@@ -38,7 +38,7 @@
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
-            <widget class="QListView" name="todoView_2">
+            <widget class="QTreeView" name="todoView_2">
              <property name="selectionMode">
               <enum>QAbstractItemView::SingleSelection</enum>
              </property>

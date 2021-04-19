@@ -29,7 +29,6 @@ class AppDemo(QMainWindow):
         treeModel = QStandardItemModel()
         rootNode = treeModel.invisibleRootItem()
 
-
         # America
         america = StandardItem('America', 16, set_bold=True)
 
@@ -44,7 +43,6 @@ class AppDemo(QMainWindow):
         california.appendRow(sanfrancisco)
         california.appendRow(sanjose)
 
-
         texas = StandardItem('Texas', 14)
         america.appendRow(texas)
 
@@ -56,15 +54,13 @@ class AppDemo(QMainWindow):
         texas.appendRow(houston)
         texas.appendRow(dallas)
 
-
         # Canada
-        canada = StandardItem('America', 16, set_bold=True)
+        canada = StandardItem('Canada', 16, set_bold=True)
 
         alberta = StandardItem('Alberta', 14)
         bc = StandardItem('British Columbia', 14)
         ontario = StandardItem('Ontario', 14)
         canada.appendRows([alberta, bc, ontario])
-
 
         rootNode.appendRow(america)
         rootNode.appendRow(canada)

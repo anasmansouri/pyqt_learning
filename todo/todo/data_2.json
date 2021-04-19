@@ -1,0 +1,17 @@
+{"Upload Download Management": [
+            "Request Download", "Request Upload"],
+            "Stored Data Transmission": ["Clear Diagnostic Informaiton", "Clear/Reset Emission-Related Diagnostic ",
+                                                                         "Information"],
+            "Diagnostic and Communication Management": ["Link Control", "Diagnostic session Control"],
+
+            "Remote Activation Of Routine": ["Routine Control / Start Basic Setting",
+                                             "Routine Control / Request Routine Results / Basic Setting"],
+            "Input Output Control": ["Input Output Control By Identifier / Actuator Test / Short Term ",
+                                     "Adjustment",
+                                     "Input Output Control By Identifier / Actuator Test / Return ",
+                                     "Control To ECU"
+                                     ],
+            "Data Transmisson": ["Read Data By Identifier / Measurement Value",
+                                 "Read Data By Identfier / Ecu Identification"
+                                 ]
+        }

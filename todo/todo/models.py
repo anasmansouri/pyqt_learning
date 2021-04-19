@@ -2,6 +2,7 @@ import sys
 import json
 from PyQt5 import QtCore, QtGui, QtWidgets, uic
 from PyQt5.QtCore import Qt
+
 tick = QtGui.QImage('tick.png')
 
 
@@ -24,3 +25,5 @@ class TodoModel(QtCore.QAbstractListModel):
 
     def rowCount(self, index):
         return len(self.todos)
+
+
