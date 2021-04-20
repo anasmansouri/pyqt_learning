@@ -1,7 +1,7 @@
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 import json
 from list_model import TodoModel
+
 
 class MyListView(QtWidgets.QListView):
     def __init__(self, x):
@@ -11,7 +11,7 @@ class MyListView(QtWidgets.QListView):
 
     def set_dids(self, dids=None):
         if dids is not None:
-            self.list_model.todos = dids
+            self.list_model.services = dids
             self.list_model.layoutChanged().emit()
 
     def add(self, text):
@@ -22,7 +22,7 @@ class MyListView(QtWidgets.QListView):
 
         if text:  # Don't add empty strings.
             # Access the list via the model.
-            self.list_model.todos.append((False, text))
+            self.list_model.services.append((False, text))
             # Trigger refresh.
             self.list_model.layoutChanged.emit()
             # Empty the input
@@ -34,7 +34,7 @@ class MyListView(QtWidgets.QListView):
             # Indexes is a list of a single item in single-select mode.
             index = indexes[0]
             # Remove the item and refresh.
-            del self.list_model.todos[index.row()]
+            del self.list_model.services[index.row()]
             self.list_model.layoutChanged.emit()
             # Clear the selection (as it is no longer valid).
             self.clearSelection()
@@ -45,8 +45,8 @@ class MyListView(QtWidgets.QListView):
         if indexes:
             index = indexes[0]
             row = index.row()
-            status, text = self.list_model.todos[row]
-            self.list_model.todos[row] = (True, text)
+            status, text = self.list_model.services[row]
+            self.list_model.services[row] = (True, text)
             # .dataChanged takes top-left and bottom right, which are equal
             # for a single selection.
             self.list_model.dataChanged.emit(index, index)
@@ -57,11 +57,11 @@ class MyListView(QtWidgets.QListView):
     def load_data(self):
         try:
             with open('data.db', 'r') as f:
-                self.list_model.todos = json.load(f)
+                self.list_model.services = json.load(f)
 
         except Exception:
             pass
 
     def save(self):
         with open('data.db', 'w') as f:
-            json.dump(self.list_model.todos, f)
+            json.dump(self.list_model.services, f)

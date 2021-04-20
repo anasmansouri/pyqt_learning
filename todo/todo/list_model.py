@@ -7,23 +7,23 @@ tick = QtGui.QImage('tick.png')
 
 
 class TodoModel(QtCore.QAbstractListModel):
-    def __init__(self, *args, todos=None, **kwargs):
+    def __init__(self, *args, services=None, **kwargs):
         super(TodoModel, self).__init__(*args, **kwargs)
-        self.todos = todos or []
+        self.services = services or []
 
     def data(self, index, role):
         if role == Qt.DisplayRole:
-            _, text = self.todos[index.row()]
+            _, text = self.services[index.row()]
 
             return text
 
         if role == Qt.DecorationRole:
-            status, _ = self.todos[index.row()]
+            status, _ = self.services[index.row()]
 
             if status:
                 return tick
 
     def rowCount(self, index):
-        return len(self.todos)
+        return len(self.services)
 
 

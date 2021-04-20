@@ -1,0 +1,16 @@
+{
+          "Upload Download Management": [
+            {"Request Download":["did 1","did 2","did3"]},
+            {"Request Upload":["did 4","did 5","did 6"]}],
+
+          "Stored Data Transmission": [
+              {"Clear Diagnostic Informaiton":["did 7","did 8","did 9"] },
+              {"Clear/Reset Emission-Related Diagnostic": ["did 10","did 11","did 12"]},
+              {"Information": ["did 13","did 14"]}
+            ],
+
+          "Diagnostic and Communication Management": [
+              {"Link Control": ["did 15", "did 16"]},
+              {"Diagnostic session Control": ["did 17", "did 18"]}
+            ]
+}
